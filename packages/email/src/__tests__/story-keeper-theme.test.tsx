@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { render } from '@react-email/components'
-import { JSDOM } from 'jsdom'
+import { Window } from 'happy-dom'
 import { PasswordResetEmail } from '../templates/password-reset'
 import { MagicLinkEmail } from '../templates/magic-link'
 import { StatusChangeEmail } from '../templates/status-change'
@@ -8,8 +8,10 @@ import { StatusChangeEmail } from '../templates/status-change'
 const BASE = 'https://community.storykeeper.cards'
 const LOGO = `${BASE}/api/storage/logos/test.png?email=1`
 
-function documentFor(html: string): Document {
-  return new JSDOM(html).window.document
+function documentFor(html: string) {
+  const window = new Window()
+  window.document.write(html)
+  return window.document
 }
 
 describe('Story Keeper email compatibility', () => {
