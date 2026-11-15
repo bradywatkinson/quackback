@@ -38,7 +38,7 @@ interface EmailLayoutProps {
 export function EmailLayout({
   preview,
   logoUrl,
-  logoAlt = 'Quackback',
+  logoAlt = 'Story Keeper',
   children,
   footer,
   showPoweredBy: showPoweredByOverride,
@@ -56,27 +56,41 @@ export function EmailLayout({
         <Section style={{ backgroundColor: colors.background }}>
           {/* dir again here: some clients drop the <html> attributes. */}
           <Container style={layout.container} dir={dir}>
-            {/* Logo */}
+            {/* Table layout also keeps the wordmark aligned in Outlook. */}
             <Section style={branding.logoContainer}>
-              <Img
-                src={logoUrl ?? DEFAULT_LOGO_URL}
-                alt={logoAlt}
-                width={branding.logo.width}
-                height={branding.logo.height}
-                style={branding.logo}
-              />
+              <table role="presentation" cellPadding={0} cellSpacing={0} align="center">
+                <tbody>
+                  <tr>
+                    <td style={{ verticalAlign: 'middle', paddingRight: '12px' }}>
+                      <Img
+                        src={logoUrl ?? DEFAULT_LOGO_URL}
+                        alt={logoAlt}
+                        width={branding.logo.width}
+                        height={branding.logo.height}
+                        style={branding.logo}
+                      />
+                    </td>
+                    <td style={{ verticalAlign: 'middle' }}>
+                      <Text style={branding.appName}>Story Keeper</Text>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </Section>
 
-            {children}
+            <Section style={layout.content}>
+              {children}
+              {footer}
+            </Section>
 
-            {/* Footer */}
-            {footer}
             {showPoweredBy ? (
-              <Text style={typography.footer}>
-                <Link href="https://quackback.io" style={{ ...utils.link, fontSize: '13px' }}>
-                  Powered by Quackback
-                </Link>
-              </Text>
+              <Section style={layout.footer}>
+                <Text style={{ ...typography.footer, marginTop: '0' }}>
+                  <Link href="https://quackback.io" style={{ ...utils.link, fontSize: '13px' }}>
+                    Powered by Quackback
+                  </Link>
+                </Text>
+              </Section>
             ) : null}
           </Container>
         </Section>

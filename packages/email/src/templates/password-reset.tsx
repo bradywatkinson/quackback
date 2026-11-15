@@ -9,7 +9,7 @@ interface PasswordResetEmailProps {
 
 export function PasswordResetEmail({ resetLink, logoUrl }: PasswordResetEmailProps) {
   return (
-    <EmailLayout preview="Reset your Quackback password" logoUrl={logoUrl}>
+    <EmailLayout preview="Reset your Story Keeper password" logoUrl={logoUrl}>
       {/* Content */}
       <Heading style={{ ...typography.h1, textAlign: 'center' }}>Reset your password</Heading>
       <Text style={{ ...typography.text, textAlign: 'center' }}>
@@ -25,10 +25,11 @@ export function PasswordResetEmail({ resetLink, logoUrl }: PasswordResetEmailPro
 
       {/* Fallback Link */}
       <Text style={typography.textSmall}>
-        Or copy and paste this link into your browser:{' '}
+        If the button doesn&apos;t work,{' '}
         <Link href={resetLink} style={utils.link}>
-          {resetLink}
+          open the password reset page
         </Link>
+        .
       </Text>
 
       {/* Footer */}

@@ -859,7 +859,7 @@ export async function sendPasswordResetEmail(
   log.debug('sending password reset email')
   return sendEmail({
     to,
-    subject: 'Reset your Quackback password',
+    subject: 'Reset your Story Keeper password',
     react: PasswordResetEmail({ resetLink, logoUrl }),
     emailType: 'PasswordResetEmail',
     preview: { resetLink },
