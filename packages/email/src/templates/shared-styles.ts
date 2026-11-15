@@ -2,50 +2,67 @@
  * Shared email styles for Quackback emails
  *
  * Ensures consistent branding across all email templates.
- * Colors are derived from the app's design system.
+ * Colors follow Story Keeper's existing email design.
  */
 
-export const DEFAULT_LOGO_URL = 'https://quackback.io/logo.png'
+export const DEFAULT_LOGO_URL = 'https://www.storykeeper.cards/assets/icons/icon-256x256.png'
 
-// Brand colors (converted from oklch to hex for email compatibility)
+// Story Keeper's Hearth palette, from convex/emails/components.tsx in
+// bradywatkinson/story-keeper. Hex colors work in clients without CSS variables.
 export const colors = {
-  // Primary gold - oklch(0.886 0.176 86) ≈ #FFD43B
-  primary: '#FFD43B',
-  primaryDark: '#F2C230',
+  primary: '#3C5641',
+  primaryDark: '#2C4030',
+  onPrimary: '#F6EFE2',
 
   // Text colors
-  heading: '#0f172a', // slate-900
-  text: '#334155', // slate-700
-  textMuted: '#64748b', // slate-500
-  textLight: '#94a3b8', // slate-400
+  heading: '#322E27',
+  text: '#5c564b',
+  textMuted: '#686256',
+  textLight: '#686256',
 
   // Background colors
-  background: '#f8fafc', // slate-50
-  surface: '#ffffff',
-  surfaceMuted: '#f1f5f9', // slate-100
+  background: '#F6EFE2',
+  surface: '#FCF8F0',
+  surfaceMuted: '#EBE1CE',
 
   // Border
-  border: '#e2e8f0', // slate-200
+  border: '#EBE1CE',
 }
+
+const bodyFont = '"Hanken Grotesk", system-ui, -apple-system, Arial, sans-serif'
+const displayFont = '"Fredoka", system-ui, Verdana, sans-serif'
 
 // Common layout styles
 export const layout = {
   main: {
     backgroundColor: colors.background,
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily: bodyFont,
+    margin: '0',
+    padding: '24px 0',
+    color: colors.heading,
   },
   container: {
     backgroundColor: colors.surface,
-    padding: '48px 32px',
-    maxWidth: '560px',
-    borderRadius: '12px',
+    padding: '0',
+    maxWidth: '600px',
+    border: `1px solid ${colors.border}`,
+    borderRadius: '14px',
+    overflow: 'hidden' as const,
+  },
+  content: {
+    padding: '32px 24px',
+  },
+  footer: {
+    backgroundColor: colors.background,
+    borderTop: `1px solid ${colors.border}`,
+    padding: '20px 24px',
   },
 }
 
 // Typography styles
 export const typography = {
   h1: {
+    fontFamily: displayFont,
     color: colors.heading,
     fontSize: '24px',
     fontWeight: '700' as const,
@@ -54,6 +71,7 @@ export const typography = {
     marginBottom: '8px',
   },
   h2: {
+    fontFamily: displayFont,
     color: colors.heading,
     fontSize: '20px',
     fontWeight: '600' as const,
@@ -89,11 +107,11 @@ export const typography = {
 export const button = {
   primary: {
     backgroundColor: colors.primary,
-    borderRadius: '8px',
-    color: '#09090b',
+    borderRadius: '30px',
+    color: colors.onPrimary,
     fontSize: '16px',
     fontWeight: '600',
-    padding: '14px 28px',
+    padding: '16px 28px',
     textDecoration: 'none',
     display: 'inline-block',
   },
@@ -107,8 +125,8 @@ export const utils = {
     marginBottom: '32px',
   },
   link: {
-    color: '#b45309',
-    textDecoration: 'none',
+    color: colors.primary,
+    textDecoration: 'underline',
   },
   codeBox: {
     backgroundColor: colors.surfaceMuted,
@@ -132,20 +150,21 @@ export const utils = {
 export const branding = {
   logoContainer: {
     textAlign: 'center' as const,
-    paddingBottom: '32px',
+    padding: '22px 16px',
+    backgroundColor: colors.primary,
   },
   logo: {
-    width: 48,
-    height: 48,
+    width: 40,
+    height: 40,
     display: 'block' as const,
-    margin: '0 auto',
+    borderRadius: '11px',
   },
   appName: {
-    color: colors.heading,
-    fontSize: '18px',
-    fontWeight: '700',
-    marginTop: '12px',
-    marginBottom: '0',
-    textAlign: 'center' as const,
+    color: colors.onPrimary,
+    fontFamily: displayFont,
+    fontSize: '21px',
+    fontWeight: '500',
+    margin: '0',
+    lineHeight: '26px',
   },
 }
